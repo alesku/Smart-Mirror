@@ -57,7 +57,7 @@ class Clock(Frame):
     def tick(self):
         time2 = time.strftime('%H:%M')
         day_of_week2 = time.strftime('%A')
-        date2 = time.strftime("%b %d, %Y")
+        date2 = time.strftime("%d. %B %Y")
         # if time string has changed, update it
         if time2 != self.time1:
             self.time1 = time2

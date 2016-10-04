@@ -1,3 +1,4 @@
+#-*-coding: utf-8-*-
 # smartmirror.py
 # requirements
 # requests, feedparser, traceback, Pillow

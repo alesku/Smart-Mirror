@@ -11,9 +11,11 @@ import traceback
 import feedparser
 from PIL import Image, ImageTk
 
-ip = '<IP>'
-country_code = 'us'
-weather_api_token = '<TOKEN>'
+# Set your public IP. It will be used to check your location 
+# and to correctly display weather
+ip = '141.70.81.151'
+country_code = 'de'
+weather_api_token = 'https://api.darksky.net/forecast/d825aed0e5f732fe6f17d761c5a37a3d/37.8267,-122.4233'
 
 
 # maps open weather icons to

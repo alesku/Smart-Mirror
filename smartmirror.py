@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #-*-coding: utf-8-*-
 # smartmirror.py
 # requirements
@@ -15,7 +16,7 @@ from PIL import Image, ImageTk
 # and to correctly display weather
 ip = '141.70.81.151'
 country_code = 'de'
-weather_api_token = 'https://api.darksky.net/forecast/d825aed0e5f732fe6f17d761c5a37a3d/37.8267,-122.4233'
+weather_api_token = 'd825aed0e5f732fe6f17d761c5a37a3d'
 
 
 # maps open weather icons to
@@ -174,86 +175,86 @@ class Weather(Frame):
         return 1.8 * (kelvin_temp - 273) + 32
 
 
-class News(Frame):
-    def __init__(self, parent, *args, **kwargs):
-        Frame.__init__(self, parent, *args, **kwargs)
-        self.config(bg='black')
-        self.title = 'Headlines'
-        self.newsLbl = Label(self, text=self.title, font=('Helvetica', 28), fg="white", bg="black")
-        self.newsLbl.pack(side=TOP, anchor=W)
-        self.headlinesContainer = Frame(self, bg="black")
-        self.headlinesContainer.pack(side=TOP)
-        self.get_headlines()
+#class News(Frame):
+#    def __init__(self, parent, *args, **kwargs):
+#        Frame.__init__(self, parent, *args, **kwargs)
+#        self.config(bg='black')
+#        self.title = 'Headlines'
+#        self.newsLbl = Label(self, text=self.title, font=('Helvetica', 28), fg="white", bg="black")
+#        self.newsLbl.pack(side=TOP, anchor=W)
+#        self.headlinesContainer = Frame(self, bg="black")
+#        self.headlinesContainer.pack(side=TOP)
+#        self.get_headlines()
 
-    def get_headlines(self):
-        try:
-            # remove all children
-            for widget in self.headlinesContainer.winfo_children():
-                widget.destroy()
-            if country_code == None:
-                headlines_url = "https://news.google.com/news?ned=us&output=rss"
-            else:
-                headlines_url = "https://news.google.com/news?ned=%s&output=rss" % country_code
+#    def get_headlines(self):
+#        try:
+#            # remove all children
+#            for widget in self.headlinesContainer.winfo_children():
+#                widget.destroy()
+#            if country_code == None:
+#                headlines_url = "https://news.google.com/news?ned=us&output=rss"
+#            else:
+#                headlines_url = "https://news.google.com/news?ned=%s&output=rss" % country_code
                 
-            feed = feedparser.parse(headlines_url)
+#            feed = feedparser.parse(headlines_url)
 
-            for post in feed.entries[0:5]:
-                headline = NewsHeadline(self.headlinesContainer, post.title)
-                headline.pack(side=TOP, anchor=W)
-        except Exception as e:
-            traceback.print_exc()
-            print "Error: %s. Cannot get news." % e
+#            for post in feed.entries[0:5]:
+#                headline = NewsHeadline(self.headlinesContainer, post.title)
+#                headline.pack(side=TOP, anchor=W)
+#        except Exception as e:
+#            traceback.print_exc()
+#            print "Error: %s. Cannot get news." % e
 
-        self.after(600000, self.get_headlines)
-
-
-class NewsHeadline(Frame):
-    def __init__(self, parent, event_name=""):
-        Frame.__init__(self, parent, bg='black')
-
-        image = Image.open("assets/Newspaper.png")
-        image = image.resize((25, 25), Image.ANTIALIAS)
-        image = image.convert('RGB')
-        photo = ImageTk.PhotoImage(image)
-
-        self.iconLbl = Label(self, bg='black', image=photo)
-        self.iconLbl.image = photo
-        self.iconLbl.pack(side=LEFT, anchor=N)
-
-        self.eventName = event_name
-        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', 18), fg="white", bg="black")
-        self.eventNameLbl.pack(side=LEFT, anchor=N)
+#        self.after(600000, self.get_headlines)
 
 
-class Calendar(Frame):
-    def __init__(self, parent, *args, **kwargs):
-        Frame.__init__(self, parent, bg='black')
-        self.title = 'Calendar Events'
-        self.calendarLbl = Label(self, text=self.title, font=('Helvetica', 28), fg="white", bg="black")
-        self.calendarLbl.pack(side=TOP, anchor=E)
-        self.calendarEventContainer = Frame(self, bg='black')
-        self.calendarEventContainer.pack(side=TOP, anchor=E)
-        self.get_events()
+#class NewsHeadline(Frame):
+#    def __init__(self, parent, event_name=""):
+#        Frame.__init__(self, parent, bg='black')
 
-    def get_events(self):
-        #TODO: implement this method
-        # reference https://developers.google.com/google-apps/calendar/quickstart/python
+#        image = Image.open("assets/Newspaper.png")
+#        image = image.resize((25, 25), Image.ANTIALIAS)
+#        image = image.convert('RGB')
+#        photo = ImageTk.PhotoImage(image)
 
-        # remove all children
-        for widget in self.calendarEventContainer.winfo_children():
-            widget.destroy()
+#        self.iconLbl = Label(self, bg='black', image=photo)
+#        self.iconLbl.image = photo
+#        self.iconLbl.pack(side=LEFT, anchor=N)
 
-        calendar_event = CalendarEvent(self.calendarEventContainer)
-        calendar_event.pack(side=TOP, anchor=E)
-        pass
+#        self.eventName = event_name
+#        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', 18), fg="white", bg="black")
+#        self.eventNameLbl.pack(side=LEFT, anchor=N)
 
 
-class CalendarEvent(Frame):
-    def __init__(self, parent, event_name="Event 1"):
-        Frame.__init__(self, parent, bg='black')
-        self.eventName = event_name
-        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', 18), fg="white", bg="black")
-        self.eventNameLbl.pack(side=TOP, anchor=E)
+#class Calendar(Frame):
+#    def __init__(self, parent, *args, **kwargs):
+#        Frame.__init__(self, parent, bg='black')
+#        self.title = 'Calendar Events'
+#        self.calendarLbl = Label(self, text=self.title, font=('Helvetica', 28), fg="white", bg="black")
+#        self.calendarLbl.pack(side=TOP, anchor=E)
+#        self.calendarEventContainer = Frame(self, bg='black')
+#        self.calendarEventContainer.pack(side=TOP, anchor=E)
+#        self.get_events()
+
+#    def get_events(self):
+#        #TODO: implement this method
+#        # reference https://developers.google.com/google-apps/calendar/quickstart/python
+
+#        # remove all children
+#        for widget in self.calendarEventContainer.winfo_children():
+#            widget.destroy()
+
+#        calendar_event = CalendarEvent(self.calendarEventContainer)
+#        calendar_event.pack(side=TOP, anchor=E)
+#        pass
+
+
+#class CalendarEvent(Frame):
+#    def __init__(self, parent, event_name="Event 1"):
+#        Frame.__init__(self, parent, bg='black')
+#        self.eventName = event_name
+#        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', 18), fg="white", bg="black")
+#        self.eventNameLbl.pack(side=TOP, anchor=E)
 
 
 class FullscreenWindow:

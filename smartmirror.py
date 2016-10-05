@@ -6,6 +6,7 @@
 
 from Tkinter import *
 import time
+import locale
 import requests
 import json
 import traceback
@@ -14,10 +15,14 @@ from PIL import Image, ImageTk
 
 # Set your public IP. It will be used to check your location 
 # and to correctly display weather
-ip = '141.70.81.151'
+ip = '185.53.177.9'
+# Conutry Code is used only for News
 country_code = 'de'
+
 weather_api_token = 'd825aed0e5f732fe6f17d761c5a37a3d'
 
+# Datumformat muss Deutsch sein
+locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
 
 # maps open weather icons to
 icon_lookup = {
@@ -42,15 +47,15 @@ class Clock(Frame):
         Frame.__init__(self, parent, bg='black')
         # initialize time label
         self.time1 = ''
-        self.timeLbl = Label(self, font=('Helvetica', 48), fg="white", bg="black")
+        self.timeLbl = Label(self, font=('Roboto-Light', 48), fg="white", bg="black")
         self.timeLbl.pack(side=TOP, anchor=E)
         # initialize day of week
         self.day_of_week1 = ''
-        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Helvetica', 18), fg="white", bg="black")
+        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Roboto-Light', 18), fg="white", bg="black")
         self.dayOWLbl.pack(side=TOP, anchor=E)
         # initialize date label
         self.date1 = ''
-        self.dateLbl = Label(self, text=self.date1, font=('Helvetica', 18), fg="white", bg="black")
+        self.dateLbl = Label(self, text=self.date1, font=('Roboto-Light', 18), fg="white", bg="black")
         self.dateLbl.pack(side=TOP, anchor=E)
         self.tick()
 
@@ -84,15 +89,15 @@ class Weather(Frame):
         self.icon = ''
         self.degreeFrm = Frame(self, bg="black")
         self.degreeFrm.pack(side=TOP, anchor=W)
-        self.temperatureLbl = Label(self.degreeFrm, font=('Helvetica', 94), fg="white", bg="black")
+        self.temperatureLbl = Label(self.degreeFrm, font=('Roboto-Light', 94), fg="white", bg="black")
         self.temperatureLbl.pack(side=LEFT, anchor=N)
         self.iconLbl = Label(self.degreeFrm, bg="black")
         self.iconLbl.pack(side=LEFT, anchor=N, padx=20)
-        self.currentlyLbl = Label(self, font=('Helvetica', 28), fg="white", bg="black")
+        self.currentlyLbl = Label(self, font=('Roboto-Light', 28), fg="white", bg="black")
         self.currentlyLbl.pack(side=TOP, anchor=W)
-        self.forecastLbl = Label(self, font=('Helvetica', 18), fg="white", bg="black")
+        self.forecastLbl = Label(self, font=('Roboto-Light', 18), fg="white", bg="black")
         self.forecastLbl.pack(side=TOP, anchor=W)
-        self.locationLbl = Label(self, font=('Helvetica', 18), fg="white", bg="black")
+        self.locationLbl = Label(self, font=('Roboto-Light', 18), fg="white", bg="black")
         self.locationLbl.pack(side=TOP, anchor=W)
         self.get_weather()
         
@@ -119,7 +124,7 @@ class Weather(Frame):
             location2 = "%s, %s" % (location_obj['city'], location_obj['region_code'])
 
             # get weather
-            weather_req_url = "https://api.darksky.net/forecast/%s/%s,%s" % (weather_api_token, lat,lon)
+            weather_req_url = "https://api.darksky.net/forecast/%s/%s,%s?lang=de&units=si" % (weather_api_token, lat,lon)
             r = requests.get(weather_req_url)
             weather_obj = json.loads(r.text)
 
@@ -271,10 +276,10 @@ class FullscreenWindow:
         self.tk.bind("<Escape>", self.end_fullscreen)
         # clock
         self.clock = Clock(self.topFrame)
-        self.clock.pack(side=RIGHT, anchor=N, padx=100, pady=60)
+        self.clock.pack(side=RIGHT, anchor=N, padx=1, pady=1)
         # weather
         self.weather = Weather(self.topFrame)
-        self.weather.pack(side=LEFT, anchor=N, padx=100, pady=60)
+        self.weather.pack(side=LEFT, anchor=N, padx=1, pady=1)
         # news
         # self.news = News(self.bottomFrame)
         # self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)

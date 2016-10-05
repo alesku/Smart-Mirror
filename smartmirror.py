@@ -6,7 +6,7 @@
 
 from Tkinter import *
 import time
-import locale
+# import locale
 import requests
 import json
 import traceback
@@ -22,7 +22,8 @@ country_code = 'de'
 weather_api_token = 'd825aed0e5f732fe6f17d761c5a37a3d'
 
 # Datumformat muss Deutsch sein
-locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
+# Datumformat sollte man in Query String erledingen.
+# locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
 
 # maps open weather icons to
 icon_lookup = {

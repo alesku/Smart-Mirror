@@ -78,6 +78,26 @@ class Clock(Frame):
         # could use >200 ms, but display gets jerky
         self.timeLbl.after(200, self.tick)
 
+class Energie(Frame):
+	def __init__(self, parent, *args, **kwargs):
+		Frame.__init__(self, parent, bg='black')
+		# initialize energy label
+		self.title = "Inselnetz"
+		self.energyLbl = Label(self, text=self.title, font=('Roboto-Light', 28), fg="white", bg="black")
+		self.energyLbl.pack(side=TOP, anchor=W)
+		self.titleEerg = "Energie Erzeugt"
+		self.energyLbl = Label(self, text=self.titleEerg, font=('Roboto-Light', 12), fg="white", bg="black")
+		self.energyLbl.pack(side=TOP, anchor=W)
+		
+		self.titleEverb = "Energie Verbrauch"
+		self.energyLbl = Label(self, text=self.titleEverb, font=('Roboto-Light', 12), fg="white", bg="black")
+		self.energyLbl.pack(side=TOP, anchor=W)
+		
+		self.titleEverk = "Energie Verkauft"
+		self.energyLbl = Label(self, text=self.titleEverk, font=('Roboto-Light', 12), fg="white", bg="black")
+		self.energyLbl.pack(side=TOP, anchor=W)
+		#self.energyContainer = Frame(self, bg="black")
+        #self.energyContainer.pack(side=TOP)
 
 class Weather(Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -277,6 +297,9 @@ class FullscreenWindow:
         # clock
         self.clock = Clock(self.topFrame)
         self.clock.pack(side=RIGHT, anchor=N, padx=1, pady=1)
+        # energie
+        self.energie = Energie(self.bottomFrame)
+        self.energie.pack(side=RIGHT, anchor=N, padx=100, pady=1)
         # weather
         self.weather = Weather(self.topFrame)
         self.weather.pack(side=LEFT, anchor=N, padx=1, pady=1)

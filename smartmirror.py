@@ -184,8 +184,8 @@ class News(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
         self.config(bg='black')
-        self.title = 'Headlines'
-        self.newsLbl = Label(self, text=self.title, font=('Helvetica', 28), fg="white", bg="black")
+        self.title = 'Schlagzeile'
+        self.newsLbl = Label(self, text=self.title, font=('Roboto-Light', 28), fg="white", bg="black")
         self.newsLbl.pack(side=TOP, anchor=W)
         self.headlinesContainer = Frame(self, bg="black")
         self.headlinesContainer.pack(side=TOP)
@@ -203,7 +203,7 @@ class News(Frame):
                 
             feed = feedparser.parse(headlines_url)
 
-            for post in feed.entries[0:5]:
+            for post in feed.entries[0:3]:
                 headline = NewsHeadline(self.headlinesContainer, post.title)
                 headline.pack(side=TOP, anchor=W)
         except Exception as e:
@@ -227,7 +227,7 @@ class NewsHeadline(Frame):
         self.iconLbl.pack(side=LEFT, anchor=N)
 
         self.eventName = event_name
-        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', 18), fg="white", bg="black")
+        self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', 16), fg="white", bg="black")
         self.eventNameLbl.pack(side=LEFT, anchor=N)
 
 
@@ -282,7 +282,7 @@ class FullscreenWindow:
         self.weather.pack(side=LEFT, anchor=N, padx=1, pady=1)
         # news
         self.news = News(self.bottomFrame)
-        self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
+        self.news.pack(side=LEFT, anchor=S, padx=500, pady=60)
         # calender - removing for now
         # self.calender = Calendar(self.bottomFrame)
         # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)

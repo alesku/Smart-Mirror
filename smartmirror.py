@@ -184,7 +184,7 @@ class News(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
         self.config(bg='black')
-        self.title = 'Schlagzeile'
+        self.title = 'Schlagzeilen'
         self.newsLbl = Label(self, text=self.title, font=('Roboto-Light', 28), fg="white", bg="black")
         self.newsLbl.pack(side=TOP, anchor=W)
         self.headlinesContainer = Frame(self, bg="black")
@@ -281,8 +281,8 @@ class FullscreenWindow:
         self.weather = Weather(self.topFrame)
         self.weather.pack(side=LEFT, anchor=N, padx=1, pady=1)
         # news
-        self.news = News(self.bottomFrame)
-        self.news.pack(side=LEFT, anchor=S, padx=500, pady=60)
+        #self.news = News(self.bottomFrame)
+        #self.news.pack(side=LEFT, anchor=S, padx=1, pady=1)
         # calender - removing for now
         # self.calender = Calendar(self.bottomFrame)
         # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)

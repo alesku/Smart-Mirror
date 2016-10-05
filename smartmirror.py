@@ -15,7 +15,7 @@ from PIL import Image, ImageTk
 
 # Set your public IP. It will be used to check your location 
 # and to correctly display weather
-ip = '185.53.177.9'
+ip = '193.196.64.2'
 # Conutry Code is used only for News
 country_code = 'de'
 
